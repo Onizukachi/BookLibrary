@@ -1,0 +1,70 @@
+<%= form_with(model: [:admin, product], class: "contents") do |form| %>
+  <% if product.errors.any? %>
+    <div id="error_explanation" class="bg-red-50 text-red-500 px-3 py-2 font-medium rounded-md mt-3">
+      <h2><%= pluralize(product.errors.count, "error") %> prohibited this product from being saved:</h2>
+
+      <ul class="list-disc ml-6">
+        <% product.errors.each do |error| %>
+          <li><%= error.full_message %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="my-5">
+    <%= form.label :name %>
+    <%= form.text_field :name, class: ["block shadow rounded-md border outline-none px-3 py-2 mt-2 w-full", {"border-gray-400 focus:outline-blue-600": product.errors[:name].none?, "border-red-400 focus:outline-red-600": product.errors[:name].any?}] %>
+  </div>
+
+  <div class="my-5">
+    <%= form.label :description %>
+    <%= form.text_area :description, rows: 4, class: ["block shadow rounded-md border outline-none px-3 py-2 mt-2 w-full", {"border-gray-400 focus:outline-blue-600": product.errors[:description].none?, "border-red-400 focus:outline-red-600": product.errors[:description].any?}] %>
+  </div>
+
+  <div class="my-5">
+    <%= form.label :price %>
+    <%= form.number_field :price, class: ["block shadow rounded-md border outline-none px-3 py-2 mt-2 w-full", {"border-gray-400 focus:outline-blue-600": product.errors[:price].none?, "border-red-400 focus:outline-red-600": product.errors[:price].any?}] %>
+  </div>
+
+  <div class="my-5">
+    <%= form.label :category_id %>
+    <%= form.text_field :category_id, class: ["block shadow rounded-md border outline-none px-3 py-2 mt-2 w-full", {"border-gray-400 focus:outline-blue-600": product.errors[:category_id].none?, "border-red-400 focus:outline-red-600": product.errors[:category_id].any?}] %>
+  </div>
+
+  <div class="my-5">
+    <%= form.label :active %>
+    <%= form.check_box :active, class: ["block shadow rounded-md border outline-none mt-2 h-5 w-5", {"border-gray-400 focus:outline-blue-600": product.errors[:active].none?, "border-red-400 focus:outline-red-600": product.errors[:active].any?}] %>
+  </div>
+
+  <div class="my-5" data-controller="image">
+    <% if product.images.any? %>
+      <%= form.label "Current images" %>
+      <div class="flex gap-6 mt-2" data-image-target="currentImages">
+        <% product.images.each do |image| %>
+          <div class="flex">
+            <%= image_tag image, alt: "Изображение", class: "w-36 h-28 object-cover rounded-md" %>
+            <button type="button" class="flex self-start ml-1"
+                    data-action="image#remove"
+                    data-id="<%= image.id %>">✖</button>
+          </div>
+        <% end %>
+      </div>
+    <% end %>
+
+    <%= form.hidden_field :remove_image_ids, value: "", data: { image_target: "removeInput" } %>
+
+    <div class="flex gap-2 items-center">
+      <%= form.label :images, "Add Images", class: "basis-28" %>
+      <%= form.file_field :images, multiple: true,
+                          class: "block shadow rounded-md border outline-none px-3 py-2 mt-2",
+                          data: { action: "change->image#preview" } %>
+    </div>
+
+    <div class="flex gap-6 mt-2" data-image-target="newImages"></div>
+  </div>
+
+  <div class="flex justify-between mt-4">
+    <%= form.submit class: "rounded-md px-3.5 py-2.5 bg-blue-600 hover:bg-blue-500 text-white inline-block font-medium cursor-pointer" %>
+    <%= link_to "Back to categories", admin_products_path, class: "ml-2 rounded-md px-3.5 py-2.5 bg-gray-100 hover:bg-gray-50 inline-block font-medium" %>
+  </div>
+<% end %>

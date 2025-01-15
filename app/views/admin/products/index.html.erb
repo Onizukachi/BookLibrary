@@ -1,0 +1,66 @@
+<% content_for :title, "Products" %>
+
+<div class="w-full">
+  <% if notice.present? %>
+    <p class="py-2 px-3 bg-green-50 mb-5 text-green-500 font-medium rounded-md inline-block" id="notice"><%= notice %></p>
+  <% end %>
+
+  <div class="flex justify-between items-center">
+    <h1 class="font-bold text-4xl">Products</h1>
+    <%= link_to "New product", new_admin_product_path, class: "rounded-md px-3.5 py-2.5 bg-blue-600 hover:bg-blue-500 text-white block font-medium" %>
+  </div>
+
+  <div id="products" class="min-w-full mt-8">
+    <div class="relative flex flex-col w-full h-full text-gray-700 bg-white shadow-md rounded-lg bg-clip-border">
+      <table class="w-full text-left table-auto min-w-max">
+        <thead>
+        <tr>
+          <th class="p-4 border-b border-slate-300 bg-slate-50">
+          </th>
+          <th class="p-4 border-b border-slate-300 bg-slate-50">
+            <p class="block text-sm font-normal leading-none text-slate-500">
+              Name
+            </p>
+          </th>
+          <th class="p-4 border-b border-slate-300 bg-slate-50">
+            <p class="block text-sm font-normal leading-none text-slate-500">
+              Description
+            </p>
+          </th>
+          <th class="p-4 border-b border-slate-300 bg-slate-50">
+            <p class="block text-sm font-normal leading-none text-slate-500">
+              Price
+            </p>
+          </th>
+          <th class="p-4 border-b border-slate-300 bg-slate-50">
+            <p class="block text-sm font-normal leading-none text-slate-500">
+              Active
+            </p>
+          </th>
+        </tr>
+        </thead>
+        <tbody>
+        <% @products.each do |product| %>
+          <tr class="hover:bg-slate-50 border-b border-slate-200">
+            <td class="p-4 py-5">
+              <%= product.images.any? ? image_tag(product.images.first.variant(:thumb), class: "object-cover") : nil %>
+            </td>
+            <td class="p-4 py-5">
+              <p class="block text-sm text-slate-800"><%= link_to product.name, [:admin, product], class: "underline" %></p>
+            </td>
+            <td class="p-4 py-5">
+              <p class="block text-sm text-slate-800"><%= product.description %></p>
+            </td>
+            <td class="p-4 py-5">
+              <p class="block text-sm text-slate-800"><%= (product.price / 100.0).to_s %></p>
+            </td>
+            <td class="p-4 py-5">
+              <p class="block text-sm text-slate-800"><%= product.active %></p>
+            </td>
+          </tr>
+        <% end %>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>
