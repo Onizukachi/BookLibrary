@@ -36,6 +36,13 @@
     <%= form.check_box :active, class: ["block shadow rounded-md border outline-none mt-2 h-5 w-5", {"border-gray-400 focus:outline-blue-600": product.errors[:active].none?, "border-red-400 focus:outline-red-600": product.errors[:active].any?}] %>
   </div>
 
+  <% if action_name == 'edit' %>
+    <div class="my-5">
+      <%= link_to "Stocks for this product", admin_product_stocks_path(product), class: "underline" %>
+    </div>
+
+  <% end %>
+
   <div class="my-5" data-controller="image">
     <% if product.images.any? %>
       <%= form.label "Current images" %>

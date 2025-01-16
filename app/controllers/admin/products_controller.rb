@@ -25,6 +25,10 @@ class Admin::ProductsController < AdminController
 
     respond_to do |format|
       if @product.save
+        if params[:product][:images].present?
+          @product.images.attach(params[:product][:images])
+        end
+
         format.html { redirect_to [:admin, @product], notice: "Product was successfully created." }
       else
         format.html { render :new, status: :unprocessable_entity }
