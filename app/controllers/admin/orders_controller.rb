@@ -1,9 +1,11 @@
-class Admin::OrdersController < ApplicationController
+class Admin::OrdersController < AdminController
   before_action :set_order, only: %i[ show edit update destroy ]
 
   # GET /admin/orders
   def index
-    @orders = Order.all
+    @orders = Order.order(created_at: :asc).includes(:products)
+    @fulfilled_orders = @orders.where(fulfilled: true)
+    @unfulfilled_orders = @orders.where(fulfilled: false)
   end
 
   # GET /admin/orders/1

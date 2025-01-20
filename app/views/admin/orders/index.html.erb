@@ -10,16 +10,103 @@
     <%= link_to "New order", new_admin_order_path, class: "rounded-md px-3.5 py-2.5 bg-blue-600 hover:bg-blue-500 text-white block font-medium" %>
   </div>
 
-  <div id="admin_orders" class="min-w-full">
-    <% if @orders.any? %>
-      <% @orders.each do |order| %>
-        <%= render order %>
-        <p>
-          <%= link_to "Show this order", order, class: "ml-2 rounded-md px-3.5 py-2.5 bg-gray-100 hover:bg-gray-50 inline-block font-medium" %>
-        </p>
-      <% end %>
-    <% else %>
-      <p class="text-center my-10">No orders found.</p>
-    <% end %>
+  <h2 class=mt-5>Unfulfilled Orders</h2>
+  <div id="products" class="min-w-full mt-8">
+    <div class="relative flex flex-col w-full h-full text-gray-700 bg-white shadow-md rounded-lg bg-clip-border">
+      <table class="w-full text-left table-auto min-w-max">
+        <thead>
+        <tr>
+          <th class="p-4 border-b border-slate-300 bg-slate-50">
+            <p class="block text-sm font-normal leading-none text-slate-500">
+              Order ID
+            </p>
+          </th>
+          <th class="p-4 border-b border-slate-300 bg-slate-50">
+            <p class="block text-sm font-normal leading-none text-slate-500">
+              Customer Email
+            </p>
+          </th>
+          <th class="p-4 border-b border-slate-300 bg-slate-50">
+            <p class="block text-sm font-normal leading-none text-slate-500">
+              Address
+            </p>
+          </th>
+          <th class="p-4 border-b border-slate-300 bg-slate-50">
+            <p class="block text-sm font-normal leading-none text-slate-500">
+              Total
+            </p>
+          </th>
+        </tr>
+        </thead>
+        <tbody>
+        <% @unfulfilled_orders.each do |order| %>
+          <tr class="hover:bg-slate-50 border-b border-slate-200">
+            <td class="p-4 py-5">
+              <%= link_to order.id, [:admin, order], class: "underline" %>
+            </td>
+            <td class="p-4 py-5">
+             <%= order.email %>
+            </td>
+            <td class="p-4 py-5">
+              <%= order.address %>
+            </td>
+            <td class="p-4 py-5">
+              <%= order.total %>
+            </td>
+          </tr>
+        <% end %>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <h2 class="mt-5">Fulfilled Orders</h2>
+  <div id="products" class="min-w-full mt-8">
+    <div class="relative flex flex-col w-full h-full text-gray-700 bg-white shadow-md rounded-lg bg-clip-border">
+      <table class="w-full text-left table-auto min-w-max">
+        <thead>
+        <tr>
+          <th class="p-4 border-b border-slate-300 bg-slate-50">
+            <p class="block text-sm font-normal leading-none text-slate-500">
+              Order ID
+            </p>
+          </th>
+          <th class="p-4 border-b border-slate-300 bg-slate-50">
+            <p class="block text-sm font-normal leading-none text-slate-500">
+              Customer Email
+            </p>
+          </th>
+          <th class="p-4 border-b border-slate-300 bg-slate-50">
+            <p class="block text-sm font-normal leading-none text-slate-500">
+              Address
+            </p>
+          </th>
+          <th class="p-4 border-b border-slate-300 bg-slate-50">
+            <p class="block text-sm font-normal leading-none text-slate-500">
+              Total
+            </p>
+          </th>
+        </tr>
+        </thead>
+        <tbody>
+        <% @fulfilled_orders.each do |order| %>
+          <tr class="hover:bg-slate-50 border-b border-slate-200">
+            <td class="p-4 py-5">
+              <%= link_to order.id, [:admin, order], class: "underline" %>
+            </td>
+            <td class="p-4 py-5">
+              <%= order.email %>
+            </td>
+            <td class="p-4 py-5">
+              <%= order.address %>
+            </td>
+            <td class="p-4 py-5">
+              <%= order.total %>
+            </td>
+          </tr>
+        <% end %>
+        </tbody>
+      </table>
+    </div>
   </div>
 </div>

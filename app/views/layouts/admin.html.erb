@@ -41,9 +41,15 @@
               <% end %>
             </li>
             <li>
-              <%= link_to admin_path, class: "flex gap-2 px-4 py-2 hover:rounded hover:bg-gray-700" do %>
+              <%= link_to admin_orders_path, class: "flex gap-2 px-4 py-2 hover:rounded hover:bg-gray-700" do %>
                 <%= icon "truck", class: "w-6" %>
                 <span class="hidden md:inline-block">Orders</span>
+              <% end %>
+            </li>
+            <li>
+              <%= link_to destroy_admin_session_path, data: { turbo_method: :delete, turbo_confirm:  "Are you sure?" }, class: "flex gap-2 px-4 py-2 hover:rounded hover:bg-gray-700" do %>
+                <%= icon "arrow-right-start-on-rectangle", class: "w-6" %>
+                <span class="hidden md:inline-block">Sign Out</span>
               <% end %>
             </li>
           </ul>
