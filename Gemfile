@@ -73,3 +73,5 @@ end
 gem "devise", "~> 4.9"
 
 gem "rails_icons", "~> 1.0"
+
+gem "stripe", "~> 13.3"
