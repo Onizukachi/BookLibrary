@@ -1,24 +1,14 @@
-# README
-
-This README would normally document whatever steps are necessary to get the
-application up and running.
+Fullstack Shop: Ruby on Rails 7, Hotwire, Tailwind, Stripe, PostgreSQL
+![image](https://github.com/user-attachments/assets/04c69604-64ca-4478-bd3f-99fa3859c6be)
+![image](https://github.com/user-attachments/assets/1b53f5a5-9258-41f4-b3fb-2c5a4fbf7d1d)
 
 Things you may want to cover:
 
 * Ruby version
-
-* System dependencies
+`3.3.2`
 
 * Configuration
-
-* Database creation
+Add your env variables to the `config/credentials.yml.enc` file. You can do this by running `bin/rails credentials:edit`
 
 * Database initialization
-
-* How to run the test suite
-
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
+run `bin/rails db:migrate` to create the tables
