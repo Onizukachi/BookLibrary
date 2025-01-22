@@ -57,6 +57,8 @@
         <% end %>
         </tbody>
       </table>
+
+      <%== pagy_nav(@unfulfilled_orders_pagy) if @unfulfilled_orders_pagy.pages > 1 %>
     </div>
   </div>
 
@@ -107,6 +109,7 @@
         <% end %>
         </tbody>
       </table>
+      <%== pagy_nav(@fulfilled_orders_pagy) if @fulfilled_orders_pagy.pages > 1 %>
     </div>
   </div>
 </div>

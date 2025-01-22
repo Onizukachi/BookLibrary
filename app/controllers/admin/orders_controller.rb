@@ -4,8 +4,8 @@ class Admin::OrdersController < AdminController
   # GET /admin/orders
   def index
     @orders = Order.order(created_at: :asc).includes(:products)
-    @fulfilled_orders = @orders.where(fulfilled: true)
-    @unfulfilled_orders = @orders.where(fulfilled: false)
+    @fulfilled_orders_pagy, @fulfilled_orders = pagy(@orders.where(fulfilled: true), page_param: :page_fulfilled)
+    @unfulfilled_orders_pagy, @unfulfilled_orders = pagy(@orders.where(fulfilled: false), page_param: :page_unfulfilled)
   end
 
   # GET /admin/orders/1
