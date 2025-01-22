@@ -1,4 +1,4 @@
-Fullstack Shop: Ruby on Rails 7, Hotwire, Tailwind, Stripe, PostgreSQL
+# Fullstack Shop: Ruby on Rails 7, Hotwire, Tailwind, Stripe, PostgreSQL
 
 ![image](https://github.com/user-attachments/assets/04c69604-64ca-4478-bd3f-99fa3859c6be)
 ![image](https://github.com/user-attachments/assets/1b53f5a5-9258-41f4-b3fb-2c5a4fbf7d1d)
