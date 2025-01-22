@@ -4,7 +4,7 @@ class WebhooksController < ApplicationController
   def stripe
     payload = request.body.read
     sig_header = request.env['HTTP_STRIPE_SIGNATURE']
-    endpoint_secret = Rails.configuration.stripe[:webhook_secret]
+    endpoint_secret = "whsec_338ba06f03442865b806f6461c273019ef6aa480e65e14a78da282c9ff0ae96c" # Rails.configuration.stripe[:webhook_secret]
     event = nil
 
     begin
@@ -31,7 +31,10 @@ class WebhooksController < ApplicationController
                                                         })
       line_items = full_session.line_items
       line_items["data"].each do |line_item|
-        product = Stripe::Product.retrieve(line_item["product_id"])
+        product = Stripe::Product.retrieve(line_item["price"]["product"])
+        product_id = product["metadata"]["product_id"].to_i
+        OrderProduct.create!(order: order, product_id: product_id, quantity: item["quantity"], size: product["metadata"]["size"])
+        Stock.find(product["metadata"]["stock_id"]).decrement!(:amount, item["quantity"])
       end
     else
       puts "Unhandled event type: #{event.type}"
