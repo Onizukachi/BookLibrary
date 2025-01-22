@@ -46,7 +46,6 @@ export default class extends Controller {
   }
 
   checkout() {
-    console.log("SSS")
     const csrfToken = document.querySelector("[name='csrf-token']").content
     const cart = JSON.parse(localStorage.getItem("cart"))
     const payload = {

@@ -36,4 +36,11 @@ class CheckoutsController < ApplicationController
 
     render json:  { url: session.url }
   end
+
+  def success
+  end
+
+  def cancel
+
+  end
 end
